@@ -14,7 +14,7 @@ const App = () => {
         Cookies.set('nextUri', '/bookmarks');
 
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:5000/test').then(res => {
+        axios.get('https://andres.run/auth').then(res => {
             console.log(res.status);
             if(res.status == 200){
                 dispatch({ type: 'set-username', payload: res.data.message });
