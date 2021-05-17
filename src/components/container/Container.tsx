@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../global/Card';
+import Icon from '../global/Icon';
  
 const Container = () => {
     return (

@@ -10,7 +10,9 @@
 		margin-left: 15px;
 	}
 
-	&:nth-child(1) {
+	& > span:not(:first-child) {
+		display: flex;
+
 		> * {
 			color: white;
 			font-weight: 600;
@@ -36,5 +38,21 @@
 	}
 	& * {
 		color: $textPrimary;
+	}
+}
+
+.logout {
+	border: none;
+	border-radius: 4px;
+	padding: 0.5rem 1rem;
+	color: $textPrimary;
+	font-weight: 600;
+	font-size: 90%;
+	background-color: $logoutFirst;
+
+	transition: background-color 0.1s;
+
+	&:hover {
+		background-color: $logoutSecond;
 	}
 }

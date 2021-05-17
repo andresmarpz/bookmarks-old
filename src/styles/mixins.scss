@@ -29,3 +29,8 @@ $media_queries: (
 		@content;
 	}
 }
+
+@mixin defaultBackground {
+	min-height: 100vh;
+	background-color: $backFirst;
+}
