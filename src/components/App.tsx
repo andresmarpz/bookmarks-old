@@ -11,6 +11,8 @@ const App = () => {
     const { state, dispatch } = useContext(Store);
 
     useEffect(() => {
+        Cookies.set('nextUri', '/bookmarks');
+
         axios.defaults.withCredentials = true;
         axios.get('http://localhost:5000/test').then(res => {
             console.log(res.status);
