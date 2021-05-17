@@ -1,0 +1,27 @@
+name: Deploy
+on:
+    push:
+        branches: [main]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Make envfile
+              uses: SpicyPizza/create-envfile@v1
+              with:
+                  REACT_APP_CLIENT_ID: ${{ secrets.CLIENT_ID }}
+                  directory: "./"
+                  file_name: ".env"
+            - name: Copy contents to server and create react build
+              uses: appleboy/ssh-action@master
+              with:
+                  host: andres.run
+                  username: ${{ secrets.USERNAME }}
+                  port: 22
+                  key: ${{ secrets.SSHKEY }}
+                  script: |
+                      cd /var/www
+                      rm -rf bookmarks
+                      git clone git@github.com:andresmarpz/bookmarks.git
+                      cd bookmarks && npm install
+                      npm run build

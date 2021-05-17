@@ -1,0 +1,40 @@
+.navbar {
+	min-height: 3.5rem;
+	background-color: $backSecond;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	& * {
+		margin-left: 15px;
+	}
+
+	&:nth-child(1) {
+		> * {
+			color: white;
+			font-weight: 600;
+			margin-right: 15px;
+		}
+	}
+}
+
+.searchbar {
+	background-color: $backForth;
+	border-radius: 5px;
+
+	> input {
+		font-weight: 600;
+		padding: 5px 10px;
+		background-color: transparent;
+		border: none;
+		width: 80%;
+
+		&:focus {
+			outline: none;
+		}
+	}
+	& * {
+		color: $textPrimary;
+	}
+}
