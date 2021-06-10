@@ -2,6 +2,7 @@ import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useEffect, useReducer, useState } from 'react';
+import apiUrl from '../helper/Constants';
 import isDev from '../helper/Environment';
  
 interface Card{
@@ -68,17 +69,18 @@ const StoreJSX = ({children}: any) => {
     useEffect(() => {
         console.log(process.env.NODE_ENV);
         console.log(isDev());
+        console.log(apiUrl);
 
         Cookies.set('nextUri', '/bookmarks', { domain: '.local.test' });
 
         axios.defaults.withCredentials = true;
-        axios.get(isDev() ? 'http://api.local.test/auth' : 'https://api.andres.run/auth').then(res => {
+        axios.get(apiUrl +'/auth').then(res => {
             if(res.status === 200){
                 console.log(res);
                 if(res.data.title === 'TRUE'){
                     dispatch({ type: 'authenticate', payload: { username: res.data.message.username, country: res.data.message.country} });
 
-                    axios.get(isDev() ? 'http://api.local.test/get/cards' : 'https://api.andres.run/get/cards').then(res => {
+                    axios.get(apiUrl +'/get/cards').then(res => {
                         res.data.cards.forEach((card: Card) => dispatch({type: 'add-card', payload: card}));
                         setAppState(appStates.LOADED);
                     });
