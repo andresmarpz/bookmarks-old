@@ -2,12 +2,14 @@ import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useEffect, useReducer, useState } from 'react';
+import isDev from '../helper/Environment';
  
 interface Card{
     title: string,
     link: string,
     description: string,
-    category: string
+    category: string,
+    id: string
 }
 
 interface User{
@@ -24,14 +26,18 @@ const initialState = {
 
 type actionType = 
     | { type: 'authenticate', payload: User }
-    | { type: 'add-card', payload: Card };
+    | { type: 'add-card', payload: Card }
+    | { type: 'remove-card', payload: String };
 
 const reducer = (state: typeof initialState, action: actionType) => {
     switch(action.type){
         case 'authenticate':
             return {...state, authenticated: true, user: action.payload };
         case 'add-card':
-            return {...state};
+            return {...state, cards: [...state.cards, action.payload]};
+        case 'remove-card':
+            const cards = state.cards.filter(card => card.id !== action.payload);
+            return {...state, cards: cards};
     }
 }
 
@@ -60,39 +66,24 @@ const StoreJSX = ({children}: any) => {
     const value = {state, dispatch, appState};
 
     useEffect(() => {
-        Cookies.set('nextUri', '/bookmarks');
+        Cookies.set('nextUri', '/bookmarks', { domain: '.local.test' });
 
         axios.defaults.withCredentials = true;
-        axios.get('http://localhost:5000/auth').then(res => {
-            if(res.status == 200){
+        axios.get(isDev() ? 'http://api.local.test/auth' : 'https://api.andres.run/auth').then(res => {
+            if(res.status === 200){
                 console.log(res);
                 if(res.data.title === 'TRUE'){
                     dispatch({ type: 'authenticate', payload: { username: res.data.message.username, country: res.data.message.country} });
 
-                    axios.get('http://localhost:5000/get/cards', {
-                        data: {
-                            username: res.data.message.username
-                        }
-                    }).then(res => {
-                        console.log(res);
+                    axios.get(isDev() ? 'http://api.local.test/get/cards' : 'https://api.andres.run/get/cards').then(res => {
+                        res.data.cards.forEach((card: Card) => dispatch({type: 'add-card', payload: card}));
                         setAppState(appStates.LOADED);
                     });
                 }else setAppState(appStates.LOADED);
 
                 return res.data;
             }
-        })
-        // .then(userInfo => {
-        //     console.log(userInfo);
-        //     axios.get('https://api.andres.run/get/cards', {
-        //         data: {
-        //             username: userInfo.username
-        //         }
-        //     }).then(res => {
-        //         console.log(res);
-        //         setAppState(appStates.LOADED);
-        //     });
-        // });
+        });
     }, []);
 
     return (
