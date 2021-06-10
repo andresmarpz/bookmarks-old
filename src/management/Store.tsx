@@ -66,6 +66,9 @@ const StoreJSX = ({children}: any) => {
     const value = {state, dispatch, appState};
 
     useEffect(() => {
+        console.log(process.env.NODE_ENV);
+        console.log(isDev());
+
         Cookies.set('nextUri', '/bookmarks', { domain: '.local.test' });
 
         axios.defaults.withCredentials = true;
