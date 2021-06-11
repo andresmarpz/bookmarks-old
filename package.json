@@ -46,6 +46,5 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6"
-  },
-  "proxy": "http://local.test"
+  }
 }
