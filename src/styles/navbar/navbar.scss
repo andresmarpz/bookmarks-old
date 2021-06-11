@@ -7,18 +7,42 @@
 	align-items: center;
 
 	& * {
-		margin-left: 10px;
+		color: white;
 	}
 
-	& > span:not(:first-child) {
-		display: flex;
-
+	& *.user-icon,
+	*.searchbar {
 		> * {
-			color: white;
-			font-weight: 600;
-			margin-right: 15px;
+			margin-left: 10px;
 		}
 	}
+
+	> span {
+		margin: 0 0.5rem 0 0.5rem;
+	}
+
+	// > span:nth-child(1) {
+	// 	margin-left: 15px;
+	// }
+	// & > span:not(:first-child) {
+	// 	display: flex;
+
+	// 	> * {
+	// 		color: white;
+	// 		font-weight: 600;
+	// 		margin-right: 15px;
+	// 	}
+
+	// 	> span {
+	// 		> * {
+	// 			margin: 0;
+	// 		}
+
+	// 		& .user-menu {
+	// 			margin-top: 0.6rem;
+	// 		}
+	// 	}
+	// }
 }
 
 .searchbar {
@@ -38,6 +62,66 @@
 	}
 	& * {
 		color: $textPrimary;
+	}
+}
+
+.login {
+	> * {
+		margin-left: 0.6rem;
+	}
+}
+
+.user-icon {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.dropdown-btn {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	vertical-align: middle;
+	content: "";
+	border-top-style: solid;
+	border-top-width: 4px;
+	border-right: 4px solid transparent;
+	border-bottom: 0 solid transparent;
+	border-left: 4px solid transparent;
+}
+
+.user-menu {
+	position: fixed;
+	right: 0.75rem;
+	z-index: 100;
+	width: fit-content;
+	background-color: $backFourth;
+	border: 2px solid rgb(61, 61, 61);
+	border-radius: 6px;
+
+	> button {
+		color: white;
+		font-size: 1.05rem;
+		padding: 8px 12px;
+		background-color: $backFourth;
+		border: none;
+		width: 100%;
+		text-align: left;
+
+		&:hover {
+			background-color: $logoutSecond;
+		}
+	}
+
+	> *:not(button) {
+		margin: 8px;
+	}
+
+	> *:first-of-type(div) {
+		background-color: red;
+		font-weight: 400;
 	}
 }
 

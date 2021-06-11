@@ -39,7 +39,12 @@ html,
 }
 
 .loading-screen {
-	opacity: 30%;
+	position: fixed;
+	background-color: $backSecond;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -49,44 +54,10 @@ html,
 		color: $textPrimary;
 		font-weight: 700;
 	}
-}
-
-.card {
-	flex: 1 0 50%;
-	position: relative;
-	margin: 1rem 0.5rem 1rem 0.5rem;
-	border: 1px solid $backThird;
-	background-color: $backSecond;
-	min-width: 13rem;
-	padding: 2rem;
-
-	cursor: pointer;
 
 	& * {
-		color: $textPrimary;
+		opacity: 1;
 	}
-
-	&:first-of-type {
-		margin-left: 1rem;
-	}
-
-	&:hover {
-		background-color: $backFourth;
-	}
-}
-
-.delete-button {
-	position: absolute;
-	top: 5px;
-	right: 5px;
-	background-color: $logoutFirst;
-	border: none;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	padding: 5px 8px;
 }
 
 .close-button {

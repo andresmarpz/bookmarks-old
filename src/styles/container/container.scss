@@ -5,3 +5,45 @@
 	justify-content: flex-start;
 	flex-wrap: wrap;
 }
+
+.card {
+	flex: 1 0 50%;
+	min-width: 10rem;
+	min-height: 7rem;
+
+	position: relative;
+	margin: 1rem;
+	border: 1px solid $backThird;
+	border-radius: 6px;
+	background-color: $backSecond;
+	min-width: 13rem;
+	padding: 2rem;
+
+	cursor: pointer;
+
+	& * {
+		color: $textPrimary;
+	}
+
+	&:hover {
+		background-color: $backFourth;
+	}
+}
+
+.delete-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: $logoutFirst;
+	border: none;
+	border-radius: 4px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 5px 9px;
+}
+
+.card-dummy {
+}

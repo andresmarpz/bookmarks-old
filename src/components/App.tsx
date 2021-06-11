@@ -15,7 +15,7 @@ const App = () => {
                 { state.authenticated && <Footer />}
                 <Navbar />
                 <Container />
-                { appState == appStates.LOADING && <LoadingScreen /> }
+                { appState === appStates.LOADING && <LoadingScreen /> }
             </div>
         </div>
     );
