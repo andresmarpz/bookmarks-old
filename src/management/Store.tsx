@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useEffect, useReducer, useState } from 'react';
-import apiUrl from '../helper/Constants';
+import { apiUrl, domain } from '../helper/Constants';
 import isDev from '../helper/Environment';
  
 interface Card{
@@ -71,7 +71,7 @@ const StoreJSX = ({children}: any) => {
         console.log(isDev());
         console.log(apiUrl);
 
-        Cookies.set('nextUri', '/bookmarks', { domain: '.local.test' });
+        Cookies.set('nextUri', '/bookmarks', { domain: domain });
 
         axios.defaults.withCredentials = true;
         axios.get(apiUrl +'/auth').then(res => {

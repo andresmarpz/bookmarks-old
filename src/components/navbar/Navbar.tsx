@@ -8,7 +8,7 @@ import Searchbar from '../global/Searchbar';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import isDev from '../../helper/Environment';
-import apiUrl from '../../helper/Constants';
+import {apiUrl} from '../../helper/Constants';
  
 const Navbar = () => {
 
