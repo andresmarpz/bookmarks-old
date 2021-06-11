@@ -1,0 +1,62 @@
+.footer {
+	position: fixed;
+	bottom: 1.75rem;
+	left: 50%;
+	transform: translate(-50%);
+
+	border: 2px solid rgb(73, 73, 73);
+	border-radius: 99px;
+	padding: 10px;
+
+	color: white;
+
+	z-index: 10;
+}
+
+.footer-open {
+	height: 80%;
+	width: 100%;
+	border-radius: 50px;
+	bottom: -3rem;
+	background-color: $backFirst;
+	opacity: 95%;
+
+	transition: 0.3s;
+}
+
+.footer-close {
+	transition: 0.2s;
+}
+
+.footer-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: transparent;
+	border: none;
+}
+
+.new-form {
+	margin-top: 2rem;
+	padding: 1rem;
+
+	display: flex;
+	flex-direction: column;
+
+	> * {
+		color: white;
+		margin-top: 1rem;
+		background-color: $backFourth;
+		border: none;
+		padding: 10px;
+		border-radius: 6px;
+	}
+
+	> button {
+		background-color: $logoutFirst;
+	}
+}
+
+.new-form-input {
+}

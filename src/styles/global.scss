@@ -9,6 +9,7 @@
 
 @import "./navbar/navbar.scss";
 @import "./container/container.scss";
+@import "./footer/footer.scss";
 
 * {
 	font-family: "Montserrat", sans-serif;
@@ -38,6 +39,7 @@ html,
 }
 
 .loading-screen {
+	opacity: 30%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -50,6 +52,8 @@ html,
 }
 
 .card {
+	flex: 1 0 50%;
+	position: relative;
 	margin: 1rem 0.5rem 1rem 0.5rem;
 	border: 1px solid $backThird;
 	background-color: $backSecond;
@@ -67,8 +71,34 @@ html,
 	}
 
 	&:hover {
-		background-color: $backForth;
+		background-color: $backFourth;
 	}
+}
+
+.delete-button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: $logoutFirst;
+	border: none;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 5px 8px;
+}
+
+.close-button {
+	position: absolute;
+	top: 1.5rem;
+	height: 5px;
+	left: 50%;
+	transform: translate(-50%);
+	border: none;
+	border-radius: 40px;
+	background-color: rgb(225, 225, 225);
+	width: 65%;
 }
 
 .login {

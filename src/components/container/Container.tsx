@@ -10,7 +10,7 @@ const Container = () => {
     const getCards = (): JSX.Element[] => {
         const cards: JSX.Element[] = [];
         state.cards.forEach(card => 
-            cards.push(<Card key={card.id} title={card.title} description={card.description} link={card.link} />));
+            cards.push(<Card key={card.id} title={card.title} description={card.description} link={card.link} id={card.id}/>));
 
         return cards;
     }
