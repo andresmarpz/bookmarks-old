@@ -4,6 +4,16 @@
 	display: flex;
 	justify-content: flex-start;
 	flex-wrap: wrap;
+
+	@include for_breakpoint(mobile) {
+		> div {
+			margin: 1rem;
+		}
+
+		> :not(:first-child) {
+			margin-top: 0;
+		}
+	}
 }
 
 .card {
@@ -12,7 +22,6 @@
 	min-height: 7rem;
 
 	position: relative;
-	margin: 1rem;
 	border: 1px solid $backThird;
 	border-radius: 6px;
 	background-color: $backSecond;

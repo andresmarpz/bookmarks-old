@@ -12,7 +12,7 @@ const App = () => {
     return (
         <div className='app'>
             <div>
-                { state.authenticated && <Footer />}
+                { state.authenticated && appState == appStates.LOADED && <Footer />}
                 <Navbar />
                 <Container />
                 { appState === appStates.LOADING && <LoadingScreen /> }
