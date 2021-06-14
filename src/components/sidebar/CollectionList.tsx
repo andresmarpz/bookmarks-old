@@ -12,7 +12,7 @@ const CollectionList = () => {
 
 		const collections = state.collections;
 		collections.map((collection, index) => {
-			elements.push(<Collection key={'c' +index} label={collection} />);
+			elements.push(<Collection key={'c' +index} label={String(collection)} />);
 		});
 
 		return elements;

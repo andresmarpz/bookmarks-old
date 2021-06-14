@@ -39,7 +39,7 @@ const New = () => {
 
 		handleChange({ type: 'clear-values' });
 
-		dispatch({ type: 'add-dummy' });
+		dispatch({ type: 'add-dummy', payload: {label: values.collection}});
 		axios.post(apiUrl +'/add/card', {
 			card: {
 				title: values.title,

@@ -2,7 +2,7 @@ import React from 'react';
 import { useContext } from 'react';
 import { Store } from '../../management/Store';
  
-const Collection = (props: { label: String }) => {
+const Collection = (props: { label: string }) => {
 
 	const {state, dispatch} = useContext(Store);
 

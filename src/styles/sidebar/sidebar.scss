@@ -33,6 +33,17 @@
 	// align-items: center;
 }
 
+.sidebar-collections {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	> form {
+		display: flex;
+		justify-content: center;
+	}
+}
+
 .new-collection {
 	background-color: $backFirst;
 	border: none;
@@ -55,7 +66,7 @@
 .new-collection-input {
 	border: none;
 	padding: 0.35rem 1rem;
-	width: 100%;
+	width: 90%;
 
 	background-color: $backThird;
 }
@@ -74,7 +85,8 @@
 }
 
 .collection-list {
-	margin: 2rem 1rem;
+	padding: 1rem;
+	width: 100%;
 }
 
 .sidebar-icon {

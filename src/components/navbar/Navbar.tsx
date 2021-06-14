@@ -29,6 +29,7 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
+            { !state.authenticated && <span />}
             { state.authenticated && <span className='collection-label'>
                 { appState === appStates.LOADED && <SidebarIcon />}
                 <b>Collection:</b>

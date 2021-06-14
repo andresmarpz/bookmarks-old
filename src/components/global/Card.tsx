@@ -16,6 +16,7 @@ const Card = (props: { title: string, link: string, description?: string, collec
 
     const destroy = () => {
         setLoading(true);
+
         axios.post(apiUrl +'/delete/card', {
             card: {
                 id: props.id,

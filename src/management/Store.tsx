@@ -19,7 +19,7 @@ interface User{
 }
 
 interface Collection{
-    label: String
+    label: string
 }
 
 const defCollection: Collection = {
@@ -40,7 +40,7 @@ const initialState = {
 type actionType = 
     | { type: 'authenticate', payload: User }
     | { type: 'add-card', payload: Card }
-    | { type: 'add-dummy' }
+    | { type: 'add-dummy', payload: Collection }
     | { type: 'add-collection', payload: String }
     | { type: 'change-collection', payload: Collection }
     | { type: 'replace-dummy', payload: Card }
@@ -63,13 +63,12 @@ const reducer = (state: typeof initialState, action: actionType) => {
                 title: 'Loading..',
                 description: '...',
                 link: '',
-                collection: '',
+                collection: action.payload.label,
                 id: 'dummy'
             };
 
             return {...state, cards: [...state.cards, card]};
         case 'add-card':
-            console.log('adding card');
             return {...state, cards: [...state.cards, action.payload]};
         case 'add-collection':
             return {...state, collections: [...state.collections, action.payload]};
