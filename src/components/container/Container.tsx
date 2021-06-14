@@ -1,16 +1,19 @@
 import React, { useContext, useEffect } from 'react';
-import { Store } from '../../management/Store';
+import { appStates, Store } from '../../management/Store';
 import Card from '../global/Card';
-import Icon from '../global/Icon';
- 
+import Toolbar from './Toolbar'; 
+import New from '../footer/New';
+
 const Container = () => {
 
-    const {state, dispatch} = useContext(Store);
+    const {state, dispatch, appState} = useContext(Store);
 
     const getCards = (): JSX.Element[] => {
         const cards: JSX.Element[] = [];
-        state.cards.forEach(card => 
-            cards.push(<Card key={card.id} title={card.title} description={card.description} link={card.link} id={card.id} loading={card.id === 'dummy'}/>));
+        const collection = state.collection;
+        const filtered = state.cards.filter(card => card.collection === state.collection.label);
+        filtered.forEach(card => 
+            cards.push(<Card key={card.id} title={card.title} description={card.description} link={card.link} collection={card.collection} id={card.id} loading={card.id === 'dummy'}/>));
 
         return cards;
     }
@@ -21,8 +24,12 @@ const Container = () => {
     }, [state.cards]);
 
     return (
-        <div className='container'>
-            {cards}
+        <div>
+            <Toolbar />
+            { appState === appStates.LOADED && state.new && <New />}
+            <div className='container'>
+                {cards}
+            </div>
         </div>
     );
 }

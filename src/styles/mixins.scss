@@ -2,7 +2,8 @@ $size__site_content_width: 1024px;
 
 $media_queries: (
 	"mobile": "only screen and (max-width: 430px)",
-	"mobile-large": "only screen and (min-width: 431px) and (max-width: 667px)",
+	"mobile-large": "only screen and (min-width: 431px) and (max-width: 519px)",
+	"small-tablet": "only screen and (min-width: 520px) and (max-width: 667px)",
 	"tablet":
 		"only screen and (min-width: 668px) and (max-width: $size__site_content_width)",
 	"desktop": "only screen and (min-width: ($size__site_content_width + 1))",

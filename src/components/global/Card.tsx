@@ -5,7 +5,7 @@ import { apiUrl } from '../../helper/Constants';
 import { Store } from '../../management/Store';
 import SVG from 'react-inlinesvg';
  
-const Card = (props: { title: string, link: string, description?: string, id: string, loading: boolean }) => {
+const Card = (props: { title: string, link: string, description?: string, collection: string, id: string, loading: boolean }) => {
 
     const {state, dispatch} = useContext(Store);
     const [loading, setLoading] = useState(props.loading);
@@ -18,7 +18,8 @@ const Card = (props: { title: string, link: string, description?: string, id: st
         setLoading(true);
         axios.post(apiUrl +'/delete/card', {
             card: {
-                id: props.id
+                id: props.id,
+                collection: props.collection
             }
         }).then(res => {
             if(res.status === 200)

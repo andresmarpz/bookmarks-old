@@ -10,6 +10,7 @@
 @import "./navbar/navbar.scss";
 @import "./container/container.scss";
 @import "./footer/footer.scss";
+@import "./sidebar/sidebar.scss";
 
 * {
 	font-family: "Montserrat", sans-serif;
@@ -19,7 +20,9 @@
 }
 
 html,
+body,
 #root {
+	height: 100%;
 	background-color: $backFirst;
 }
 
@@ -28,14 +31,30 @@ html,
 	min-height: 100vh;
 	background-color: $backFirst;
 }
+.app {
+	height: 100%;
+	display: flex;
+	max-width: 100%;
+}
 
-@keyframes spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+.main {
+	width: 100%;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.separator-h {
+	width: 90%;
+	margin: 0 5% 0 5%;
+
+	border: 1px solid #5e5e5e;
+}
+.separator-v {
+	height: 97%;
+	margin: 1rem 0;
+	border: 1px solid #5e5e5e;
 }
 
 .loading-screen {

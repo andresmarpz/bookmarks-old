@@ -4,6 +4,9 @@ import Container from './container/Container';
 import Navbar from './navbar/Navbar';
 import LoadingScreen from './LoadingScreen';
 import Footer from './footer/Footer';
+import Sidebar from './sidebar/Sidebar';
+import Separator from './global/Separator';
+import New from './footer/New';
 
 const App = () => {
 
@@ -11,9 +14,11 @@ const App = () => {
 
     return (
         <div className='app'>
-            <div>
-                { state.authenticated && appState == appStates.LOADED && <Footer />}
+            { state.sidebar && state.authenticated && <Sidebar />}
+            { state.sidebar && state.authenticated && <Separator vertical={true} />}
+            <div className='main'>
                 <Navbar />
+                <Separator vertical={false} />
                 <Container />
                 { appState === appStates.LOADING && <LoadingScreen /> }
             </div>

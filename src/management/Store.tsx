@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import React, { useEffect, useReducer, useState } from 'react';
+import Card from '../components/global/Card';
 import { apiUrl, domain } from '../helper/Constants';
 import isDev from '../helper/Environment';
  
@@ -8,7 +9,7 @@ interface Card{
     title: string,
     link: string,
     description?: string,
-    category: string,
+    collection: string,
     id: string
 }
 
@@ -17,11 +18,22 @@ interface User{
     id: string
 }
 
+interface Collection{
+    label: String
+}
+
+const defCollection: Collection = {
+    label: 'General'
+}
+
 const initialState = {
+    sidebar: false,
     authenticated: false,
+    new: false,
     userMenu: false,
     user: {} as User,
-    categories: [] as String[],
+    collections: [] as String[],
+    collection: defCollection,
     cards: [] as Card[]
 };
 
@@ -29,9 +41,13 @@ type actionType =
     | { type: 'authenticate', payload: User }
     | { type: 'add-card', payload: Card }
     | { type: 'add-dummy' }
+    | { type: 'add-collection', payload: String }
+    | { type: 'change-collection', payload: Collection }
     | { type: 'replace-dummy', payload: Card }
     | { type: 'remove-card', payload: String }
-    | { type: 'toggle-menu' };
+    | { type: 'toggle-menu' }
+    | { type: 'toggle-sidebar' }
+    | { type: 'toggle-new' }
 
 const reducer = (state: typeof initialState, action: actionType) => {
     switch(action.type){
@@ -47,7 +63,7 @@ const reducer = (state: typeof initialState, action: actionType) => {
                 title: 'Loading..',
                 description: '...',
                 link: '',
-                category: '',
+                collection: '',
                 id: 'dummy'
             };
 
@@ -55,11 +71,19 @@ const reducer = (state: typeof initialState, action: actionType) => {
         case 'add-card':
             console.log('adding card');
             return {...state, cards: [...state.cards, action.payload]};
+        case 'add-collection':
+            return {...state, collections: [...state.collections, action.payload]};
+        case 'change-collection':
+            return {...state, collection: action.payload};
         case 'remove-card':
             const cards = state.cards.filter(card => card.id !== action.payload);
             return {...state, cards: cards};
         case 'toggle-menu':
             return {...state, userMenu: !state.userMenu};
+        case 'toggle-sidebar':
+            return {...state, sidebar: !state.sidebar};
+        case 'toggle-new':
+            return {...state, new: !state.new};
     }
 }
 
@@ -101,8 +125,16 @@ const StoreJSX = ({children}: any) => {
                 if(res.data.title === 'TRUE'){
                     dispatch({ type: 'authenticate', payload: { username: res.data.message.username, id: String(res.data.message.id) } });
 
-                    const cards = axios.get(apiUrl +'/get/cards').then(res => {
-                        res.data.cards.forEach((card: Card) => dispatch({type: 'add-card', payload: card}));
+                    const collections = axios.get(apiUrl +'/get/collections').then(res => {
+
+                        const cols = res.data.collections;
+                        Object.keys(cols).forEach(key => {
+                            dispatch({ type: 'add-collection', payload: key });
+
+                            cols[key].forEach((card: Card) => {
+                                dispatch({ type: 'add-card', payload: card });
+                            });
+                        });
                     });
 
                     const avatar = axios.get(`https://avatars.githubusercontent.com/u/${res.data.message.id}?v=4`, {
@@ -111,8 +143,11 @@ const StoreJSX = ({children}: any) => {
                     const svg = axios.get('https://andres.run/files/plus.svg', {
                         withCredentials: false
                     });
+                    const arrow = axios.get('https://andres.run/files/arrow.svg', {
+                        withCredentials: false
+                    });
 
-                    Promise.allSettled([cards, avatar, svg]).then(() => {
+                    Promise.allSettled([collections, avatar, svg, arrow]).then(() => {
                         setAppState(appStates.LOADED);
                     });
 
