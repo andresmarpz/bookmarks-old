@@ -127,6 +127,14 @@ u {
 	}
 }
 
+.card-dummy {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+}
+
 .delete-button {
 	// position: absolute;
 	// top: 5px;
