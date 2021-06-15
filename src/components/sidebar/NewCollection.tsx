@@ -28,12 +28,12 @@ const NewCollection = () => {
 	if(focus)
 		return (
 			<form onSubmit={(e) => handleInput(e)}>
-				<input value={value} onChange={(e) => setValue(e.currentTarget.value)} className='new-collection-input' autoFocus onBlur={() => setFocus(false)} placeholder='Name..' />
+				<input value={value} onChange={(e) => setValue(e.currentTarget.value)} className='new-collection-input' autoFocus onBlur={() => {setFocus(false); setValue('')}} placeholder='Name..' />
 			</form>)
 		;
 	else
 		return (
-			<button onFocus={() => setFocus(true)} className='new-collection' onClick={() => dispatch({type: 'toggle-new'})}>
+			<button className='new-collection' onClick={() => setFocus(true)}>
 						<SVG height={16} width={16} src='https://andres.run/files/plus2.svg' />
 						New collection
 			</button>

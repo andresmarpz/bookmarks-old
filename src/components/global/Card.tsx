@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { apiUrl } from '../../helper/Constants';
 import { Store } from '../../management/Store';
 import SVG from 'react-inlinesvg';
+import CopyToClipboard from 'react-copy-to-clipboard';
  
 const Card = (props: { title: string, link: string, description?: string, collection: string, id: string, loading: boolean }) => {
 
@@ -13,7 +14,7 @@ const Card = (props: { title: string, link: string, description?: string, collec
     const handleClick = (event: any) => {
         event.preventDefault();
 
-        window.open(props.link, '_self');
+        window.open(props.link, '_blank');
     }
 
     const destroy = () => {
@@ -30,6 +31,10 @@ const Card = (props: { title: string, link: string, description?: string, collec
         });
     }
 
+    const copy = () => {
+        
+    }
+
     const getElements = (): JSX.Element[] => {
         const elements: JSX.Element[] = [];
 
@@ -40,19 +45,30 @@ const Card = (props: { title: string, link: string, description?: string, collec
                 </div>
             );
         }else{
-            elements.push(<div key={Math.random()}>
-                <h4>{props.title}</h4>
-                { props.description !== undefined && <p>{props.description}</p> }
-            </div>);
+            elements.push(
+                <div key={Math.random()} className='card-content' onClick={(event) => handleClick(event)}>
+                    <h4>{props.title}</h4>
+                    { props.description !== undefined && <p>{props.description}</p> }
+                </div>
+            );
             
-            elements.push(<button key={Math.random()} className='delete-button' onClick={destroy}>x</button>);
+            elements.push(
+                <div className='card-toolbar' key={'t' + Math.random()}>
+                    <CopyToClipboard text={props.link}>
+                        <button className='copy-button'>
+                            <SVG src='https://andres.run/files/copy.svg' />
+                        </button>
+                    </CopyToClipboard>
+                    <button className='delete-button' onClick={destroy}>x</button>
+                </div>
+            );
         }
 
         return elements;
     }
 
     return (
-        <div className='card' onClick={(event) => handleClick(event)}>
+        <div className='card'>
             {getElements()}
         </div>
     );

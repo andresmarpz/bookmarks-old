@@ -32,7 +32,7 @@ const initialState = {
     new: false,
     userMenu: false,
     user: {} as User,
-    collections: [] as String[],
+    collections: [] as string[],
     collection: defCollection,
     cards: [] as Card[]
 };
@@ -41,10 +41,10 @@ type actionType =
     | { type: 'authenticate', payload: User }
     | { type: 'add-card', payload: Card }
     | { type: 'add-dummy', payload: Collection }
-    | { type: 'add-collection', payload: String }
+    | { type: 'add-collection', payload: string }
     | { type: 'change-collection', payload: Collection }
     | { type: 'replace-dummy', payload: Card }
-    | { type: 'remove-card', payload: String }
+    | { type: 'remove-card', payload: string }
     | { type: 'toggle-menu' }
     | { type: 'toggle-sidebar' }
     | { type: 'toggle-new' }

@@ -5,7 +5,8 @@ import { useReducer } from 'react';
 import { useContext } from 'react';
 import { apiUrl } from '../../helper/Constants';
 import { Store } from '../../management/Store';
- 
+import Select from 'react-select';
+
 const New = () => {
 
 	const {state, dispatch} = useContext(Store);
@@ -32,30 +33,36 @@ const New = () => {
 
 	const [values, handleChange] = useReducer(reducer, initialState);
 
+	useEffect(() => {
+		handleChange({ type: 'change-value', target: 'collection', payload: state.collection.label });
+	}, [state.collection]);
+
 	const handleSubmit = (event: any) => {
 		event.preventDefault();
 
 		if(values.title === '' || values.link === '') return;
 
-		handleChange({ type: 'clear-values' });
+		let link = values.link;
+		if(link.search(/^http[s]?\:\/\//) == -1)
+			link = 'http://' + link;
 
-		console.log(values.link);
 		dispatch({ type: 'add-dummy', payload: {label: values.collection}});
 		axios.post(apiUrl +'/add/card', {
 			card: {
 				title: values.title,
 				description: values.description,
-				link: values.link,
+				link: link,
 				collection: values.collection
 			}
 		}).then(res => {
 			dispatch({type: 'replace-dummy', payload: {
 				title: values.title,
 				description: values.description,
-				link: values.link,
+				link: link,
 				collection: values.collection,
 				id: res.data
 			}});
+			handleChange({ type: 'clear-values' });
 		});
 	}
 
@@ -67,6 +74,20 @@ const New = () => {
 
 		return options;
 	}
+	
+	// type option = {
+	// 	value: string,
+	// 	label: string
+	// }
+
+	// const getOptions = () => {
+	// 	const options: option[] = [];
+	// 	state.collections.forEach((col: string) => {
+	// 		options.push({ value: String(col), label: String(col) });
+	// 	});
+
+	// 	return options;
+	// }
 
     return (
 		<div>
@@ -77,6 +98,7 @@ const New = () => {
 				<select value={values.collection} className='new-form-select' onChange={(event) => handleChange({ type: 'change-value', target: 'collection', payload: event.target.value })}>
 					{getOptions()}
 				</select>
+				{/* <Select className='new-form-select' options={getOptions()} /> */}
 				<button>GO</button>
 			</form>
 		</div>

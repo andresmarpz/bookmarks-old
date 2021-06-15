@@ -77,6 +77,27 @@
 .new-form-input {
 }
 
+.select-wrapper {
+	position: relative;
+	display: inline-block;
+}
+.select-wrapper:after {
+	content: "\0025BC";
+	font: normal normal normal 12px/1 FontAwesome;
+	color: white;
+	right: 14px;
+	top: 4px;
+	height: 26px;
+	padding: 15px 0px 0px 8px;
+	position: absolute;
+	pointer-events: none;
+}
+
+select,
+option {
+	-webkit-appearance: none;
+}
+
 .new-form-select {
 	background-color: $backFourth;
 	color: white;
