@@ -11,7 +11,9 @@ const Card = (props: { title: string, link: string, description?: string, collec
     const [loading, setLoading] = useState(props.loading);
 
     const handleClick = (event: any) => {
-        window.open(props.link, '_blank');
+        event.preventDefault();
+
+        window.open(props.link, '_self');
     }
 
     const destroy = () => {
@@ -38,7 +40,7 @@ const Card = (props: { title: string, link: string, description?: string, collec
                 </div>
             );
         }else{
-            elements.push(<div key={Math.random()} onClick={event => handleClick(event)}>
+            elements.push(<div key={Math.random()}>
                 <h4>{props.title}</h4>
                 { props.description !== undefined && <p>{props.description}</p> }
             </div>);
@@ -50,7 +52,7 @@ const Card = (props: { title: string, link: string, description?: string, collec
     }
 
     return (
-        <div className='card' >
+        <div className='card' onClick={(event) => handleClick(event)}>
             {getElements()}
         </div>
     );

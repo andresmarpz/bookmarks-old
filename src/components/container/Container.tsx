@@ -24,10 +24,10 @@ const Container = () => {
     }, [state.cards]);
 
     return (
-        <div>
+        <div className='main-div'>
             <Toolbar />
             { appState === appStates.LOADED && state.new && <New />}
-            <div className='container'>
+            <div className={'container ' +(state.sidebar ? 'container-open' : 'container-closed')}>
                 {cards}
             </div>
         </div>

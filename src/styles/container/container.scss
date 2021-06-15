@@ -1,23 +1,76 @@
 .container {
+	flex: 0 1 auto;
+
 	background-color: $backFirst;
+	// display: flex;
+	// justify-content: space-around;
+	// flex-wrap: wrap;
 
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
-
-	@include for_breakpoint(mobile) {
-		> :not(:first-child) {
-			margin-top: 0;
-		}
-	}
+	display: grid;
 
 	margin: 1rem;
 
-	> div {
-		@include for_breakpoint(mobile) {
-			margin: 1rem;
+	// > * {
+	// 	@include for_breakpoint(mobile small-tablet tablet desktop) {
+	// 		margin: 1rem;
+	// 	}
+	// }
+}
+
+.container-open {
+	@include for_breakpoint(mobile small-tablet tablet) {
+		grid-template-columns: 1fr;
+
+		> *:not(:first-child) {
+			margin-top: 1rem;
 		}
 	}
+
+	@include for_breakpoint(desktop) {
+		grid-template-columns: 1fr 1fr;
+
+		> *:nth-child(2n) {
+			margin-left: 0.5rem;
+		}
+		> *:nth-child(2n -1) {
+			margin-right: 0.5rem;
+		}
+		> *:nth-child(n + 3) {
+			margin-top: 1rem;
+		}
+	}
+}
+
+.container-closed {
+	@include for_breakpoint(mobile small-tablet) {
+		> *:nth-child(n + 1) {
+			margin-top: 1rem;
+		}
+	}
+
+	@include for_breakpoint(tablet desktop) {
+		grid-template-columns: 1fr 1fr;
+
+		> *:nth-child(2n) {
+			margin-left: 0.5rem;
+		}
+		> *:nth-child(2n -1) {
+			margin-right: 0.5rem;
+		}
+		> *:nth-child(n + 3) {
+			margin-top: 1rem;
+		}
+	}
+}
+
+a,
+u {
+	text-decoration: none;
+}
+
+.main-div {
+	height: 100vh;
+	overflow-y: scroll !important;
 }
 
 .card {

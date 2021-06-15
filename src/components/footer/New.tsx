@@ -39,6 +39,7 @@ const New = () => {
 
 		handleChange({ type: 'clear-values' });
 
+		console.log(values.link);
 		dispatch({ type: 'add-dummy', payload: {label: values.collection}});
 		axios.post(apiUrl +'/add/card', {
 			card: {
@@ -51,7 +52,7 @@ const New = () => {
 			dispatch({type: 'replace-dummy', payload: {
 				title: values.title,
 				description: values.description,
-				link: values.title,
+				link: values.link,
 				collection: values.collection,
 				id: res.data
 			}});

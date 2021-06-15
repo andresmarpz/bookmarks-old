@@ -1,7 +1,12 @@
 .sidebar {
+	position: sticky;
+	top: 0;
+	left: 0;
+
 	z-index: 10;
 
 	width: 25%;
+	height: 100%;
 	display: visible;
 
 	display: flex;
@@ -9,7 +14,7 @@
 
 	background-color: $backFirst;
 
-	@include for_breakpoint(mobile mobile-large) {
+	@include for_breakpoint(mobile) {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -90,7 +95,7 @@
 }
 
 .sidebar-icon {
-	z-index: 99;
+	z-index: 99 !important;
 	left: 1rem;
 	margin: 0;
 	padding: 1rem 1.5rem;

@@ -32,13 +32,19 @@ body,
 	background-color: $backFirst;
 }
 .app {
+	position: relative;
 	height: 100%;
 	display: flex;
 	max-width: 100%;
+
+	overflow-y: hidden;
 }
 
 .main {
 	width: 100%;
+
+	display: flex;
+	flex-direction: column;
 }
 
 .fixed {
@@ -59,7 +65,7 @@ body,
 
 .loading-screen {
 	position: fixed;
-	background-color: $backSecond;
+	background-color: $backFirst;
 	top: 0;
 	left: 0;
 	width: 100%;
