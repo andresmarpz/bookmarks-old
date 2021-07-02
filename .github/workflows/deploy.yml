@@ -9,7 +9,7 @@ jobs:
             - name: Copy contents to server and create react build
               uses: appleboy/ssh-action@master
               with:
-                  host: andres.run
+                  host: ${{ secrets.HOST }}
                   username: ${{ secrets.USERNAME }}
                   port: 22
                   key: ${{ secrets.SSHKEY }}
