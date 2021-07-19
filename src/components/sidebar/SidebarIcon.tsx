@@ -1,15 +1,19 @@
-import React from 'react';
-import { useContext } from 'react';
-import { Store } from '../../management/Store';
-import SVG from 'react-inlinesvg';
+import React from "react";
+import { useContext } from "react";
+import { Store } from "../../management/Store";
+import SVG from "react-inlinesvg";
 
 const SidebarIcon = () => {
+	const { state, dispatch, appState } = useContext(Store);
 
-	const {state, dispatch, appState} = useContext(Store);
+	return (
+		<button
+			className={"sidebar-icon " + (state.sidebar ? "fixed" : "")}
+			onClick={() => dispatch({ type: "toggle-sidebar" })}
+		>
+			<SVG src="https://files.andres.run/arrow.svg" />
+		</button>
+	);
+};
 
-    return (
-		<button className={'sidebar-icon ' +(state.sidebar ? 'fixed' : '')} onClick={() => dispatch({type: 'toggle-sidebar'})} ><SVG src='https://andres.run/files/arrow.svg'/></button>
-    );
-}
- 
-export default SidebarIcon
+export default SidebarIcon;

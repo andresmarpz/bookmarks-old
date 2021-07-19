@@ -1,77 +1,91 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useContext } from 'react';
-import { apiUrl } from '../../helper/Constants';
-import { Store } from '../../management/Store';
-import SVG from 'react-inlinesvg';
-import CopyToClipboard from 'react-copy-to-clipboard';
- 
-const Card = (props: { title: string, link: string, description?: string, collection: string, id: string, loading: boolean }) => {
+import axios from "axios";
+import React, { useState } from "react";
+import { useContext } from "react";
+import { apiUrl } from "../../helper/Constants";
+import { Store } from "../../management/Store";
+import SVG from "react-inlinesvg";
+import CopyToClipboard from "react-copy-to-clipboard";
 
-    const {state, dispatch} = useContext(Store);
-    const [loading, setLoading] = useState(props.loading);
+const Card = (props: {
+	title: string;
+	link: string;
+	description?: string;
+	collection: string;
+	id: string;
+	loading: boolean;
+}) => {
+	const { state, dispatch } = useContext(Store);
+	const [loading, setLoading] = useState(props.loading);
 
-    const handleClick = (event: any) => {
-        event.preventDefault();
+	const handleClick = (event: any) => {
+		event.preventDefault();
 
-        window.open(props.link, '_blank');
-    }
+		window.open(props.link, "_blank");
+	};
 
-    const destroy = () => {
-        setLoading(true);
+	const destroy = () => {
+		setLoading(true);
 
-        axios.post(apiUrl +'/delete/card', {
-            card: {
-                id: props.id,
-                collection: props.collection
-            }
-        }).then(res => {
-            if(res.status === 200)
-                dispatch({ type: 'remove-card', payload: props.id });
-        });
-    }
+		axios
+			.post(apiUrl + "/delete/card", {
+				card: {
+					id: props.id,
+					collection: props.collection,
+				},
+			})
+			.then((res) => {
+				if (res.status === 200)
+					dispatch({ type: "remove-card", payload: props.id });
+			});
+	};
 
-    const copy = () => {
-        
-    }
+	const copy = () => {};
 
-    const getElements = (): JSX.Element[] => {
-        const elements: JSX.Element[] = [];
+	const getElements = (): JSX.Element[] => {
+		const elements: JSX.Element[] = [];
 
-        if(loading){
-            elements.push(
-                <div key={Math.random()} className='card-dummy'>
-                    <SVG width={64} height={64} src='https://andres.run/files/spinner1.svg' />
-                </div>
-            );
-        }else{
-            elements.push(
-                <div key={Math.random()} className='card-content' onClick={(event) => handleClick(event)}>
-                    <h4>{props.title}</h4>
-                    { props.description !== undefined && <p>{props.description}</p> }
-                </div>
-            );
-            
-            elements.push(
-                <div className='card-toolbar' key={'t' + Math.random()}>
-                    <CopyToClipboard text={props.link}>
-                        <button className='copy-button'>
-                            <SVG src='https://andres.run/files/copy.svg' />
-                        </button>
-                    </CopyToClipboard>
-                    <button className='delete-button' onClick={destroy}>x</button>
-                </div>
-            );
-        }
+		if (loading) {
+			elements.push(
+				<div key={Math.random()} className="card-dummy">
+					<SVG
+						width={64}
+						height={64}
+						src="https://files.andres.run/spinner1.svg"
+					/>
+				</div>
+			);
+		} else {
+			elements.push(
+				<div
+					key={Math.random()}
+					className="card-content"
+					onClick={(event) => handleClick(event)}
+				>
+					<h4>{props.title}</h4>
+					{props.description !== undefined && (
+						<p>{props.description}</p>
+					)}
+				</div>
+			);
 
-        return elements;
-    }
+			elements.push(
+				<div className="card-toolbar" key={"t" + Math.random()}>
+					<CopyToClipboard text={props.link}>
+						<button className="copy-button">
+							<SVG src="https://files.andres.run/copy.svg" />
+						</button>
+					</CopyToClipboard>
+					<button className="delete-button" onClick={destroy}>
+						x
+					</button>
+				</div>
+			);
+		}
 
-    return (
-        <div className='card'>
-            {getElements()}
-        </div>
-    );
-}
- 
-export default Card
+		return elements;
+	};
+
+	return <div className="card">{getElements()}</div>;
+};
+
+export default Card;

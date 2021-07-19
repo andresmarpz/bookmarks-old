@@ -116,9 +116,15 @@ const StoreJSX = ({ children }: any) => {
 	const value = { state, dispatch, appState };
 
 	useEffect(() => {
-		Cookies.set("nextUrl", "https://bookmarks.andres.run", {
-			domain: domain,
-		});
+		Cookies.set(
+			"nextUrl",
+			isDev()
+				? "http://bookmarks.local.test"
+				: "https://bookmarks.andres.run",
+			{
+				domain: domain,
+			}
+		);
 
 		axios.defaults.withCredentials = true;
 		axios.get(apiUrl + "/auth").then((res) => {
