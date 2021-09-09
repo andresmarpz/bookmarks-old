@@ -24,11 +24,11 @@ const App = () => {
 						<Navbar />
 						<Separator vertical={false} />
 						<Container />
-						{appState === appStates.LOADING && <LoadingScreen />}
 					</div>
 				) : (
 					<LoginScreen />
 				)}
+				{appState === appStates.LOADING && <LoadingScreen />}
 			</div>
 		</div>
 	);
