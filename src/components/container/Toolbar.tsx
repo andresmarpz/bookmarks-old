@@ -15,7 +15,7 @@ const Toolbar = () => {
 				<SVG
 					width={20}
 					height={20}
-					src="https://files.andres.run/plus2.svg"
+					src="https://files.andresmarpz.com/plus2.svg"
 				/>
 			</button>
 		</div>

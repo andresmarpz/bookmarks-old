@@ -1,6 +1,8 @@
 import isDev from "./Environment";
 
-const apiUrl: string = isDev() ? 'http://api.local.test' : 'https://api.andres.run'
-const domain: string = isDev() ? '.local.test' : '.andres.run';
+const apiUrl: string = isDev()
+	? "http://api.local.test"
+	: "https://api.andresmarpz.com";
+const domain: string = isDev() ? ".local.test" : ".andresmarpz.com";
 
-export {apiUrl, domain};
+export { apiUrl, domain };

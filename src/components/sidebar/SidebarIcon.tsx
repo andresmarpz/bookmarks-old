@@ -11,7 +11,7 @@ const SidebarIcon = () => {
 			className={"sidebar-icon " + (state.sidebar ? "fixed" : "")}
 			onClick={() => dispatch({ type: "toggle-sidebar" })}
 		>
-			<SVG src="https://files.andres.run/arrow.svg" />
+			<SVG src="https://files.andresmarpz.com/arrow.svg" />
 		</button>
 	);
 };

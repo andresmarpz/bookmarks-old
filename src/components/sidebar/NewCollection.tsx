@@ -48,7 +48,7 @@ const NewCollection = () => {
 				<SVG
 					height={16}
 					width={16}
-					src="https://files.andres.run/plus2.svg"
+					src="https://files.andresmarpz.com/plus2.svg"
 				/>
 				New collection
 			</button>

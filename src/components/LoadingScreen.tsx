@@ -4,7 +4,7 @@ const LoadingScreen = () => {
 			<img
 				width="64"
 				height="64"
-				src="https://files.andres.run/spinner1.svg"
+				src="https://files.andresmarpz.com/spinner1.svg"
 				alt="a"
 			/>
 			<div>Loading..</div>

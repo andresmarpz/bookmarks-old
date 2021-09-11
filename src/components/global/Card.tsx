@@ -50,7 +50,7 @@ const Card = (props: {
 					<SVG
 						width={64}
 						height={64}
-						src="https://files.andres.run/spinner1.svg"
+						src="https://files.andresmarpz.com/spinner1.svg"
 					/>
 				</div>
 			);
@@ -72,7 +72,7 @@ const Card = (props: {
 				<div className="card-toolbar" key={"t" + Math.random()}>
 					<CopyToClipboard text={props.link}>
 						<button className="copy-button">
-							<SVG src="https://files.andres.run/copy.svg" />
+							<SVG src="https://files.andresmarpz.com/copy.svg" />
 						</button>
 					</CopyToClipboard>
 					<button className="delete-button" onClick={destroy}>

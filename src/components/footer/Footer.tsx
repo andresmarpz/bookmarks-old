@@ -25,7 +25,7 @@ const Footer = () => {
 						onClick={() => {
 							setOpen(true);
 						}}
-						icon="https://files.andres.run/plus.svg"
+						icon="https://files.andresmarpz.com/plus.svg"
 					/>
 				</div>
 			)}

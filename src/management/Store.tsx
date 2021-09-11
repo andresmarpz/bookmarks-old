@@ -120,7 +120,7 @@ const StoreJSX = ({ children }: any) => {
 			"nextUrl",
 			isDev()
 				? "http://bookmarks.local.test"
-				: "https://bookmarks.andres.run",
+				: "https://bookmarks.andresmarpz.com",
 			{
 				domain: domain,
 			}
@@ -163,11 +163,14 @@ const StoreJSX = ({ children }: any) => {
 							withCredentials: false,
 						}
 					);
-					const svg = axios.get("https://files.andres.run/plus.svg", {
-						withCredentials: false,
-					});
+					const svg = axios.get(
+						"https://files.andresmarpz.com/plus.svg",
+						{
+							withCredentials: false,
+						}
+					);
 					const arrow = axios.get(
-						"https://files.andres.run/arrow.svg",
+						"https://files.andresmarpz.com/arrow.svg",
 						{
 							withCredentials: false,
 						}
