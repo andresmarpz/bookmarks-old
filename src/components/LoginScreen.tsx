@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Login from "../components/global/Login";
 import Icon from "./global/Icon";
 import { apiUrl } from "../helper/Constants";
+import { Store } from "../management/Store";
 
 const LoginScreen = () => {
+	const { state, dispatch, appState } = useContext(Store);
+
 	return (
 		<div className="container-login">
 			<Login
@@ -17,6 +20,19 @@ const LoginScreen = () => {
 				}
 				title="Log in with Github"
 				href={apiUrl + "/login/github"}
+			/>
+			<Login
+				title="Use LocalStorage"
+				icon={
+					<Icon
+						color="#FFFFFF"
+						size="24"
+						path="M15 16h-6v-2h6v2zm9-8v2h-24v-2l4.485-8h15.087l4.428 8zm-2.286 0l-3.32-6h-12.734l-3.347 6h19.401zm-.714 14h-18v-10h-2v12h22v-12h-2v10z"
+					/>
+				}
+				onClick={() => {
+					dispatch({ type: "useLocalStorage" });
+				}}
 			/>
 		</div>
 	);

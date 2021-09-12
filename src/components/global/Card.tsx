@@ -5,6 +5,7 @@ import { apiUrl } from "../../helper/Constants";
 import { Store } from "../../management/Store";
 import SVG from "react-inlinesvg";
 import CopyToClipboard from "react-copy-to-clipboard";
+import { Card as CardT } from "../../management/Store";
 
 const Card = (props: {
 	title: string;
@@ -26,17 +27,28 @@ const Card = (props: {
 	const destroy = () => {
 		setLoading(true);
 
-		axios
-			.post(apiUrl + "/delete/card", {
-				card: {
-					id: props.id,
-					collection: props.collection,
-				},
-			})
-			.then((res) => {
-				if (res.status === 200)
-					dispatch({ type: "remove-card", payload: props.id });
-			});
+		if (state.localStorage) {
+			const cards = JSON.parse(localStorage.getItem("cards")!);
+			const filtered = cards[props.collection].filter(
+				(c: CardT) => c.id !== props.id
+			);
+			cards[props.collection] = filtered;
+
+			localStorage.setItem("cards", JSON.stringify(cards));
+			dispatch({ type: "remove-card", payload: props.id });
+		} else {
+			axios
+				.post(apiUrl + "/delete/card", {
+					card: {
+						id: props.id,
+						collection: props.collection,
+					},
+				})
+				.then((res) => {
+					if (res.status === 200)
+						dispatch({ type: "remove-card", payload: props.id });
+				});
+		}
 	};
 
 	const copy = () => {};

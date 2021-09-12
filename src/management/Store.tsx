@@ -1,3 +1,4 @@
+import assert from "assert";
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useEffect, useReducer, useState } from "react";
@@ -5,7 +6,7 @@ import Card from "../components/global/Card";
 import { apiUrl, domain } from "../helper/Constants";
 import isDev from "../helper/Environment";
 
-interface Card {
+export interface Card {
 	title: string;
 	link: string;
 	description?: string;
@@ -29,6 +30,7 @@ const defCollection: Collection = {
 const initialState = {
 	sidebar: false,
 	authenticated: false,
+	localStorage: false,
 	new: false,
 	userMenu: false,
 	user: {} as User,
@@ -47,7 +49,8 @@ type actionType =
 	| { type: "remove-card"; payload: string }
 	| { type: "toggle-menu" }
 	| { type: "toggle-sidebar" }
-	| { type: "toggle-new" };
+	| { type: "toggle-new" }
+	| { type: "useLocalStorage" };
 
 const reducer = (state: typeof initialState, action: actionType) => {
 	switch (action.type) {
@@ -88,6 +91,8 @@ const reducer = (state: typeof initialState, action: actionType) => {
 			return { ...state, sidebar: !state.sidebar };
 		case "toggle-new":
 			return { ...state, new: !state.new };
+		case "useLocalStorage":
+			return { ...state, localStorage: true };
 	}
 };
 
@@ -187,6 +192,42 @@ const StoreJSX = ({ children }: any) => {
 			}
 		});
 	}, []);
+
+	useEffect(() => {
+		if (state.localStorage) {
+			dispatch({
+				type: "authenticate",
+				payload: { username: "Local", id: "0000" },
+			});
+
+			if (localStorage.getItem("cards") == null) {
+				localStorage.setItem(
+					"cards",
+					JSON.stringify({
+						General: [],
+					})
+				);
+			}
+
+			const cards = JSON.parse(localStorage.getItem("cards")!);
+
+			Object.keys(cards).forEach((key: string) => {
+				dispatch({
+					type: "add-collection",
+					payload: key,
+				});
+
+				cards[key].forEach((card: Card) => {
+					dispatch({
+						type: "add-card",
+						payload: card,
+					});
+				});
+			});
+
+			setAppState(appStates.LOADED);
+		}
+	}, [state.localStorage]);
 
 	return <Store.Provider value={value}>{children}</Store.Provider>;
 };

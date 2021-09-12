@@ -15,13 +15,21 @@ const NewCollection = () => {
 		e.preventDefault();
 		setValue("");
 
-		axios
-			.post(apiUrl + "/add/collection", {
-				collection: value,
-			})
-			.then((res) => {
-				dispatch({ type: "add-collection", payload: res.data });
-			});
+		if (state.localStorage) {
+			const cards = JSON.parse(localStorage.getItem("cards")!);
+
+			cards[value] = [];
+			localStorage.setItem("cards", JSON.stringify(cards));
+			dispatch({ type: "add-collection", payload: value });
+		} else {
+			axios
+				.post(apiUrl + "/add/collection", {
+					collection: value,
+				})
+				.then((res) => {
+					dispatch({ type: "add-collection", payload: res.data });
+				});
+		}
 
 		setFocus(false);
 	};
